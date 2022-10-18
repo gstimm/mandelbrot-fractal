@@ -12,12 +12,11 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from ctypes import *
 import os
 
-# path = os.path.abspath(os.path.join(
-#     os.path.dirname(__file__), '..', 'fractal'))
+path = os.path.abspath(os.path.join(
+    os.path.dirname(__file__), '..', 'fractal'))
 
 
-# fractal_functions = CDLL(path + '/testeeeee.so')
-fractal_functions = CDLL('./fractal.so')
+fractal_functions = CDLL(path + '/fractal.so')
 
 
 def generate_fractal():
@@ -31,7 +30,6 @@ def generate_fractal():
         bytes("1024", encoding='utf-8'),
         bytes("pic.ppm", encoding='utf-8'),
     )
-    # fractal_functions.generate_fractal()
 
 
 class Ui_MainWindow(object):
