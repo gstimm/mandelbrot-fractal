@@ -3,20 +3,9 @@
 #include <math.h>
 #include <stdint.h>
 
-int generate_fractal(
-    char x_min[20],
-    char x_max[20],
-    char y_min[20],
-    char y_max[20],
-    char max_iter[20],
-    char x_res[20],
-    char file_name[20]);
-
-int main()
+void square(int x)
 {
-  generate_fractal(
-      "0.27085", "0.27100", "0.004640", "0.004810", "1000", "1024",
-      "pic.ppm");
+  printf("square: %d", x);
 }
 
 int generate_fractal(

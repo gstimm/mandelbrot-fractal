@@ -16,11 +16,12 @@ path = os.path.abspath(os.path.join(
     os.path.dirname(__file__), '..', 'fractal'))
 
 
-fractal_functions = CDLL(path + '/fractal.so')
+fractal_functions = CDLL(path + '/fractal.so')\
 
-print(fractal_functions.generate_fractal(
-    b"0.27085", b"0.27100", b"0.004640", b"0.004810", b"1000", b"1024" b"pic.ppm"
-))
+
+# fractal_functions.generate_fractal(
+#     "0.27085", "0.27100", "0.004640", "0.004810", "1000", "1024" "pic.ppm"
+# )
 
 
 class Ui_MainWindow(object):
@@ -51,6 +52,8 @@ class Ui_MainWindow(object):
         self.label.setObjectName("label")
         self.horizontalLayout.addWidget(self.frame)
         MainWindow.setCentralWidget(self.centralwidget)
+        self.pushButton.clicked.connect(generate_fractal)
+        self.pushButton.show()
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -59,6 +62,11 @@ class Ui_MainWindow(object):
         _translate = QtCore.QCoreApplication.translate
         self.pushButton.setText(_translate("MainWindow", "Executar simulção"))
         self.label.setText(_translate("MainWindow", "Fractal de Mandelbrot"))
+
+
+def generate_fractal():
+    print("Olaaaaaa")
+    fractal_functions.square(8)
 
 
 if __name__ == "__main__":
