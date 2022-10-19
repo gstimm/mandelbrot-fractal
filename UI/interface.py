@@ -20,7 +20,9 @@ fractal_functions = CDLL(path + '/fractal.so')
 
 
 def generate_fractal():
-    print("Olaaaaaa")
+    print('Generating fractal...')
+    ui.pushButton.setEnabled(False)
+    ui.pushButton.repaint()
     fractal_functions.generate_fractal(
         c_double(0.27085),
         c_double(0.27100),
@@ -30,6 +32,7 @@ def generate_fractal():
         bytes("1024", encoding='utf-8'),
         bytes("pic.ppm", encoding='utf-8'),
     )
+    ui.pushButton.setEnabled(True)
 
 
 class Ui_MainWindow(object):
