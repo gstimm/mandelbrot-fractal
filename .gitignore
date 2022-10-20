@@ -1,3 +1,8 @@
 .vscode
-fractal/mandelbrot-gen
-fractal/out.ppm
+dist
+build
+interface.spec
+*.ppm
+venv
+*.o
+*.so
