@@ -9,53 +9,6 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from ctypes import *
-import os
-
-path = os.path.abspath(os.path.join(
-    os.path.dirname(__file__), '..', 'fractal'))
-
-image__path = os.path.abspath(os.path.join(
-    os.path.dirname(__file__), '..'))
-
-
-fractal_functions = CDLL(path + '/fractal.so')
-
-
-def generate_fractal():
-    print('Generating fractal...')
-    ui.pushButton.hide()
-    ui.image_preview.hide()
-
-    text = get_image_name()
-
-    fractal_functions.generate_fractal(
-        c_double(0.27085),
-        c_double(0.27100),
-        c_double(0.004640),
-        c_double(0.004810),
-        bytes("500", encoding='utf-8'),
-        bytes("720", encoding='utf-8'),
-        bytes(text, encoding='utf-8'),
-    )
-    ui.pushButton.setEnabled(True)
-    ui.image_preview.show()
-    ui.pushButton.show()
-
-    ui.textEdit.clear()
-
-    ui.image_preview.setStyleSheet(
-        "background-image: url(" + image__path + "/" + text + ");")
-    print('Done!')
-
-
-def get_image_name():
-    text = ui.textEdit.toPlainText()
-    if text == '':
-        text = 'pic.ppm'
-    else:
-        text = text + '.ppm'
-    return text
 
 
 class Ui_MainWindow(object):
@@ -91,13 +44,9 @@ class Ui_MainWindow(object):
         self.image_preview.setObjectName("image_preview")
         self.textEdit = QtWidgets.QTextEdit(self.frame)
         self.textEdit.setGeometry(QtCore.QRect(10, 420, 211, 41))
-        # on press enter generate the fractal
-        self.textEdit.keyPressEvent = lambda event: generate_fractal() if event.key() == QtCore.Qt.Key_Return else QtWidgets.QTextEdit.keyPressEvent(
-            self.textEdit, event)
         self.textEdit.setObjectName("textEdit")
         self.horizontalLayout.addWidget(self.frame)
         MainWindow.setCentralWidget(self.centralwidget)
-        self.pushButton.clicked.connect(generate_fractal)
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -112,11 +61,9 @@ class Ui_MainWindow(object):
 
 if __name__ == "__main__":
     import sys
-    # create a variable to save the file name
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
-    ui.image_preview.hide()
     MainWindow.show()
     sys.exit(app.exec_())
