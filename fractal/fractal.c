@@ -26,6 +26,8 @@
 #include <math.h>
 #include <stdint.h>
 
+void main(){}; // dummy main
+
 int generate_fractal(
     double xmin,
     double xmax,

@@ -2,5 +2,7 @@
 dist
 build
 interface.spec
-pic.ppm
+*.ppm
 venv
+*.o
+*.so

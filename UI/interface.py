@@ -45,7 +45,7 @@ def generate_fractal():
     ui.textEdit.clear()
 
     ui.image_preview.setStyleSheet(
-        "background-image: url(" + image__path + "/" + text + ");")
+        "background-image: url(" + text + ");")
     print('Done!')
 
 
